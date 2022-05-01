@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Dev Self Assessment</title>
+    <title>Quiz Start - Dev Self Assessment</title>
 </head>
-<body d-flex>
-    <header>
+<body class="d-flex flex-column">
+    <header class="d-flex justify-content-between">
         <a href="">View high scores</a>
-        <p>Timer: </p>
+        <p id="countdown" class="px-4">Timer: </p>
     </header>
     <main>
-
+        <div class="bg-info w-75">
+            <button id="start">Start</button>
+        </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
