@@ -48,7 +48,7 @@ var quizObj = {
                 document.querySelector("#timer").textContent = `Time's Up!`;
             }
         }, 1000)
-    };
+    },
     createElPlaceholders: () => {
         // create <p> element for question placeholder
         var h1El = document.createElement("h1");
@@ -102,7 +102,7 @@ var quizObj = {
 // Execute application function
 var startQuiz = function () {
     // begin the timer
-    countdownTimer();
+    quizObj.countdownTimer();
     // dynamically create placeholders
     quizObj.createElPlaceholders();
     // ask user questions
