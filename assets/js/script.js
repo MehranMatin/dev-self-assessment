@@ -7,7 +7,7 @@ var quizObj = {
                 "Javascript Oriented Node": false,
                 "Javascript Object Node": false,
                 "Javascript Oriented Notation": false
-            },
+            }
         },
         2: {
             question: "What does the acronym HTML mean?",
@@ -16,7 +16,7 @@ var quizObj = {
                 "Hypertext Model Linux": false,
                 "Hypertext Markup Language": true,
                 "HTTP Messenge Length": false
-            },
+            }
         },
         3: {
             question: "What does the acronym CSS mean?",
@@ -25,22 +25,39 @@ var quizObj = {
                 "Community Styling Standards": false,
                 "Complete Style Source": false,
                 "Cascading Style Sheet": true
-            },
+            }
         },
     },
     // Ask Quiz Questions function
+    askQuizQuestion: () => {
+        
+    },
     cycleQuestions: (quizArea) => {
         // for every property in object run display for...in
         for (var questionNo in quizObj["questionData"]) {
-            // question string being asked
-            var currentQuestion = quizObj["questionData"][questionNo]["question"];
-            
-            // display question in the quiz area
-            quizArea.append(document.createElement("p").textContent = currentQuestion);
-            // debugger;
+            // create placeholder elements in text area
+            var pEl = document.createElement("p");
+            var olEl = document.createElement("ol");
+            // style elements
+            pEl.style.cssText = "color: red";
 
-            // display multiple choice answers
-            quizArea.append(document.createElement("select").textContent = "** Area for multiple choice answers **");
+            // select question's string and assign to <p> element
+            var currentQuestion = quizObj["questionData"][questionNo]["question"];
+            pEl.textContent = currentQuestion;
+
+            // select possible answer strings and assign to <li> elements
+            var possibleAnswers = Object.keys(quizObj["questionData"][questionNo]["answers"]);
+            for (var answerOption of possibleAnswers) {
+                olEl.append(document.createElement("li").textContent = answerOption);
+            }
+            
+
+            // display dynamic elements in the quiz area
+            quizArea.append(pEl);
+            quizArea.append(olEl);
+
+            // event listener for answer click
+            // remove/hide current question
         }
     }
 }
