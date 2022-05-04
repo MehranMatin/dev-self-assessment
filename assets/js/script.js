@@ -1,6 +1,10 @@
+/* GLOBAL VARIABLES */
+var quizArea = document.querySelector("#quizArea");
+
+
 var quizObj = {
-    questionData: {
-        1: {
+    questionData: [
+        {
             question: "What does the acronym JSON mean?",
             answers: {
                 "Javascript Object Notation": true,
@@ -9,7 +13,7 @@ var quizObj = {
                 "Javascript Oriented Notation": false
             }
         },
-        2: {
+        {
             question: "What does the acronym HTML mean?",
             answers: {
                 "Host Token Medial Layer": false,
@@ -18,7 +22,7 @@ var quizObj = {
                 "HTTP Messenge Length": false
             }
         },
-        3: {
+        {
             question: "What does the acronym CSS mean?",
             answers: {
                 "Computing Screen Selector": false,
@@ -27,89 +31,83 @@ var quizObj = {
                 "Cascading Style Sheet": true
             }
         },
-    },
-    // Ask Quiz Questions function
-    askQuizQuestion: () => {
-        
+    ],
+    // // Ask Quiz Questions function
+    // askQuizQuestion: () => {
+    // },
+    // BEGIN COUNTDOWN function
+    countdownTimer: () => {
+        // default start time in seconds
+        var defaulTimeLeft = 60;
+        // deduct 1 sec from time left every second
+        setInterval(function () {
+            if (defaulTimeLeft > 1) {
+                defaulTimeLeft--;
+                document.querySelector("#timer").textContent = `Time Remaining: ${defaulTimeLeft} seconds`;
+            } else {
+                document.querySelector("#timer").textContent = `Time's Up!`;
+            }
+        }, 1000)
+    };
+    createElPlaceholders: () => {
+        // create <p> element for question placeholder
+        var h1El = document.createElement("h1");
+        h1El.setAttribute('id','questionPlaceholder');
+        h1El.setAttribute('class','px-5 py-3');
+        h1El.style.cssText = "font-weight: bold";
+        console.log(h1El);
     },
     cycleQuestions: (quizArea) => {
-        // for every property in object dynamically create a placeholder elements for Q&A
-        for (var questionNo in quizObj["questionData"]) {
-            // create <p> element for question placeholder
-            var pEl = document.createElement("p");
-            pEl.style.cssText = "font-weight: bold";
-            pEl.setAttribute('class','px-5 py-3');
+        var quizQuestions = quizObj["questionData"];
 
-            // create ordered list  to hold answer <li> elements
+        // for every object in questions array show Q & A elements
+        for (var i = 0; i < quizQuestions.length; i++) {
+            var questionPlaceholder = document.getElementById("#questionPlaceholder");
+            console.log(questionPlaceholder);
+            questionPlaceholder.id = 'question-' + (i+1);
+            console.log(questionPlaceholder);
+
+            // create ordered list to hold answer <li> elements
             var olEl = document.createElement("ol");
             olEl.style.cssText = "background-color: green";
             olEl.setAttribute('class','p-5');
 
             // select question's string and assign to <p> element
-            var currentQuestion = quizObj["questionData"][questionNo]["question"];
-            pEl.textContent = currentQuestion;
+            var currentQuestion = quizQuestions[i]["question"];
+            questionPlaceholder.textContent = currentQuestion;
 
             // return array of answer strings
-            var possibleAnswers = Object.keys(quizObj["questionData"][questionNo]["answers"]);
-            // loop through array and assign each answer string to a <button> element nested within a <li> element
+            var possibleAnswers = Object.keys(quizQuestions[i]["answers"]);
+            // loop through answers array
             for (var answerOption of possibleAnswers) {
+                // assign each answer string to a <button> element...
                 var buttonEl = document.createElement("button");
-                var liEl = document.createElement("li");
                 buttonEl.textContent = answerOption;
+                // ...nested within a <li>
+                var liEl = document.createElement("li");
                 liEl.append(buttonEl);
-
+                // ...nested within the <ol> 
                 olEl.appendChild(liEl);
             }
-            
 
-            // display dynamic elements in the quiz area
-            quizArea.append(pEl);
+            // display question <p> and answers <ol> elements in the quiz area
+            quizArea.append(questionPlaceholder);
             quizArea.append(olEl);
 
-            // event listener for answer click
-            // remove/hide current question
+            // event listener for answer click to reset new question
         }
     }
 }
-
-var quizBox = function (currentQuestion, currentRightAnswer, option1, option2, option3) {
-    
-}
-
-/* GLOBAL VARIABLES */
-var timer = document.querySelector("#timer");
-var quizArea = document.querySelector("#quizArea");
-var startBtn = document.querySelector("#startBtn");
-
-// Questions & Answers object
-var quizMaterial = {
-    "What does the acronym JSON mean?":"Javascript Object Notation",
-    "What does the acronym HTML mean?":"Hypertext Markup Language",
-    "What does the acronym  CSS mean?":"Cascading Style Sheet"
-}
-
-// BEGIN COUNTDOWN function
-var countdownTimer = function () {
-    // default start time in seconds
-    var defaulTimeLeft = 60;
-    // deduct 1 sec from time left every second
-    setInterval(function () {
-        if (defaulTimeLeft > 1) {
-            defaulTimeLeft--;
-            timer.textContent = `Time Remaining: ${defaulTimeLeft} seconds`;
-        } else {
-            timer.textContent = `Time's Up!`;
-        }
-    }, 1000)
-};
 
 // Execute application function
 var startQuiz = function () {
     // begin the timer
     countdownTimer();
+    // dynamically create placeholders
+    quizObj.createElPlaceholders();
     // ask user questions
     quizObj.cycleQuestions(document.querySelector("#quizArea"));
 }
 
 // Start quiz when click event triggered
-startBtn.addEventListener("click", startQuiz);
+document.querySelector("#startBtn").addEventListener("click", startQuiz);
