@@ -33,25 +33,32 @@ var quizObj = {
         
     },
     cycleQuestions: (quizArea) => {
-        // for every property in object ask a question and collect answer
+        // for every property in object dynamically create a placeholder elements for Q&A
         for (var questionNo in quizObj["questionData"]) {
-            // create placeholder elements in text area
+            // create <p> element for question placeholder
             var pEl = document.createElement("p");
+            pEl.style.cssText = "font-weight: bold";
+            pEl.setAttribute('class','px-5 py-3');
+
+            // create ordered list  to hold answer <li> elements
             var olEl = document.createElement("ol");
-            // style elements
-            pEl.style.cssText = "color: red";
+            olEl.style.cssText = "background-color: green";
+            olEl.setAttribute('class','p-5');
 
             // select question's string and assign to <p> element
             var currentQuestion = quizObj["questionData"][questionNo]["question"];
             pEl.textContent = currentQuestion;
 
-            // list of answer strings then assign to <li> elements
+            // return array of answer strings
             var possibleAnswers = Object.keys(quizObj["questionData"][questionNo]["answers"]);
+            // loop through array and assign each answer string to a <button> element nested within a <li> element
             for (var answerOption of possibleAnswers) {
+                var buttonEl = document.createElement("button");
                 var liEl = document.createElement("li");
-                liEl.textContent = answerOption
-                olEl.appendChild(liEl)
-                // olEl.append(document.createElement("li").textContent = answerOption);
+                buttonEl.textContent = answerOption;
+                liEl.append(buttonEl);
+
+                olEl.appendChild(liEl);
             }
             
 
