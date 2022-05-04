@@ -33,7 +33,7 @@ var quizObj = {
         
     },
     cycleQuestions: (quizArea) => {
-        // for every property in object run display for...in
+        // for every property in object ask a question and collect answer
         for (var questionNo in quizObj["questionData"]) {
             // create placeholder elements in text area
             var pEl = document.createElement("p");
@@ -45,10 +45,13 @@ var quizObj = {
             var currentQuestion = quizObj["questionData"][questionNo]["question"];
             pEl.textContent = currentQuestion;
 
-            // select possible answer strings and assign to <li> elements
+            // list of answer strings then assign to <li> elements
             var possibleAnswers = Object.keys(quizObj["questionData"][questionNo]["answers"]);
             for (var answerOption of possibleAnswers) {
-                olEl.append(document.createElement("li").textContent = answerOption);
+                var liEl = document.createElement("li");
+                liEl.textContent = answerOption
+                olEl.appendChild(liEl)
+                // olEl.append(document.createElement("li").textContent = answerOption);
             }
             
 
