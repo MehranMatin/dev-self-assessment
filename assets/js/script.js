@@ -1,6 +1,6 @@
 /* GLOBAL VARIABLES */
-var quizArea = document.querySelector("#quizArea");
-
+var quizArea = document.getElementById('quizArea');
+////////////////////////////////////////////////
 
 var quizObj = {
     questionData: [
@@ -32,10 +32,11 @@ var quizObj = {
             }
         },
     ],
-    // // Ask Quiz Questions function
-    // askQuizQuestion: () => {
-    // },
-    // BEGIN COUNTDOWN function
+    ////////////////////////////////////////////////
+    hideQuizIntro: () => {
+        document.getElementById('introArea').classList.remove('d-flex');
+        document.getElementById('introArea').classList.add('d-none');
+    },
     countdownTimer: () => {
         // default start time in seconds
         var defaulTimeLeft = 60;
@@ -49,54 +50,6 @@ var quizObj = {
             }
         }, 1000)
     },
-    // createElPlaceholders: (quizArea) => {
-    //     // create <p> element for question placeholder
-    //     var h1El = document.createElement("h1");
-    //     h1El.setAttribute('id','questionPlaceholder');
-    //     h1El.setAttribute('class','px-5 py-3');
-    //     h1El.style.cssText = "font-weight: bold";
-    //     console.log(h1El);
-    // },
-    // cycleQuestions: () => {
-    //     var quizQuestions = quizObj["questionData"];
-
-    //     // for every object in questions array show Q & A elements
-    //     for (var i = 0; i < quizQuestions.length; i++) {
-    //         var questionPlaceholder = document.getElementById("#questionPlaceholder");
-    //         console.log(questionPlaceholder);
-    //         questionPlaceholder.id = 'question-' + (i+1);
-    //         console.log(questionPlaceholder);
-
-    //         // create ordered list to hold answer <li> elements
-    //         var olEl = document.createElement("ol");
-    //         olEl.style.cssText = "background-color: green";
-    //         olEl.setAttribute('class','p-5');
-
-    //         // select question's string and assign to <p> element
-    //         var currentQuestion = quizQuestions[i]["question"];
-    //         questionPlaceholder.textContent = currentQuestion;
-
-    //         // return array of answer strings
-    //         var possibleAnswers = Object.keys(quizQuestions[i]["answers"]);
-    //         // loop through answers array
-    //         for (var answerOption of possibleAnswers) {
-    //             // assign each answer string to a <button> element...
-    //             var buttonEl = document.createElement("button");
-    //             buttonEl.textContent = answerOption;
-    //             // ...nested within a <li>
-    //             var liEl = document.createElement("li");
-    //             liEl.append(buttonEl);
-    //             // ...nested within the <ol> 
-    //             olEl.appendChild(liEl);
-    //         }
-
-    //         // display question <p> and answers <ol> elements in the quiz area
-    //         quizArea.append(questionPlaceholder);
-    //         quizArea.append(olEl);
-
-    //         // event listener for answer click to reset new question
-    //     }
-    // }
     createElPlaceholders: (quizArea) => {
         // create <h3> element for question #
         var h3El = document.createElement("h3");
@@ -146,11 +99,12 @@ var quizObj = {
                 var possibleAnswers = Object.keys(quizQuestions[i]["answers"]);
                 console.log(possibleAnswers);
 
-                // loop through the new array to dynamically create new elements
-                for (var i; i <possibleAnswers.length; i++) {
+                // loop through the new array to dynamically create new li>button
+                for (var i; i < possibleAnswers.length; i++) {
                     // assign each answer string to a new <button> element...
                     var buttonEl = document.createElement("button");
                     buttonEl.setAttribute('id','choice #' + (i + 1));
+                    buttonEl.setAttribute('class','m-1 p-3 w-75 rounded text-left');
                     buttonEl.textContent = possibleAnswers[i];
 
                     // ...then nest inside a new <li>
@@ -160,7 +114,7 @@ var quizObj = {
                     // ...then nest inside placeholder <ol>
                     answersListPlaceholder.appendChild(liEl);
                 }
-                debugger;
+                // debugger;
 
                 // event listener for answer click to reset new question
                 // if () {
@@ -168,11 +122,21 @@ var quizObj = {
                 // };
             }
         }
+    },
+    endQuiz: () => {
+    // hide quiz area
+    // show the final score
+    // submit high score
+    document.getElementById('quizArea').style.display = 'none';
     }
 }
 
+////////////////////////////////////////////////
+
 // Execute application function
 var startQuiz = function () {
+    // hide intro section
+    quizObj.hideQuizIntro();
     // begin the timer
     quizObj.countdownTimer();
     // dynamically create placeholders
