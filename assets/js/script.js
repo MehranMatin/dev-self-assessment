@@ -86,7 +86,7 @@ var quizObj = {
             if (!validAnswer) {
                 // <h3> placeholder for current question number
                 document.getElementById("questionNumberPlaceholder").textContent = 'Question #' + (i+1);
-                
+
                 // <h1> placeholder for current question string 
                 var questionPlaceholder = document.getElementById("questionPlaceholder");
                 // assign question string to <h1> placeholder
@@ -97,15 +97,15 @@ var quizObj = {
 
                 // new array of answer strings using each key of answers object
                 var possibleAnswers = Object.keys(quizQuestions[i]["answers"]);
-                console.log(possibleAnswers);
 
                 // loop through the new array to dynamically create new li>button
                 for (var i; i < possibleAnswers.length; i++) {
                     // assign each answer string to a new <button> element...
                     var buttonEl = document.createElement("button");
-                    buttonEl.setAttribute('id','choice #' + (i + 1));
-                    buttonEl.setAttribute('class','m-1 p-3 w-75 rounded text-left');
+                    buttonEl.setAttribute('id','choice_#' + (i + 1));
+                    buttonEl.setAttribute('class','answerOption m-1 p-3 w-75 rounded text-left');
                     buttonEl.textContent = possibleAnswers[i];
+                    console.log(buttonEl.id);
 
                     // ...then nest inside a new <li>
                     var liEl = document.createElement("li");
@@ -114,12 +114,15 @@ var quizObj = {
                     // ...then nest inside placeholder <ol>
                     answersListPlaceholder.appendChild(liEl);
                 }
-                // debugger;
 
                 // event listener for answer click to reset new question
-                // if () {
-                //     validAnswer = true;
-                // };
+                var answerOption = document.querySelectorAll('button.answerOption');
+
+                for (var i = 0; i < answerOption.length; i++) {
+                    answerOption[i].addEventListener("click", function() {
+                        validAnswer = true;
+                    });
+                }
             }
         }
     },
