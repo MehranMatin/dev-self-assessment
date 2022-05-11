@@ -11,14 +11,14 @@
 <body class="d-flex flex-column align-items-center bg-dark">
     <header class="py-4 d-flex justify-content-around align-items-center w-100 bg-dark border-bottom">
         <a href="" class="my-3 px-4 py-2 bg-light font-size-26">View high scores</a>
-        <p id="timer" class="my-3 px-4 py-2 font-weight-bold text-success bg-light">Timer: 60 seconds</p>
+        <p id="timer" class="my-3 px-4 py-2 font-weight-bold text-success bg-light">Time Remaining: 60 seconds</p>
     </header>
 
     <main class="bg-light w-75">
         <div class="d-flex flex-column align-items-center justify-content-center bg-info p-3 min-vh-100">
             <div id="introArea" class="d-flex flex-column align-items-center">
                 <h1 class="py-2">Ready to test your skills?</h1>
-                <p class="p-2 bg-light">Wrong answers penalize your remaining time by <span class="text-danger font-weight-bold">-10 seconds</span></p>
+                <p class="p-2 bg-light">Wrong answers penalize your remaining time by <span class="text-danger font-weight-bold">-5 seconds</span></p>
                 <button id="startBtn" class="w-75 px-5 py-1 rounded-pill font-weight-bold">Start</button>
             </div>
             <div id="quizArea" class="bg-light m-5">
@@ -32,8 +32,16 @@
                 </ol>
                 <p id="result"></p>
             </div>
-            <div id="finalScore">
-
+            <div id="endQuiz">
+                <p id="finalScore"></p>
+                <label for="initials">Enter your initials</label>
+                <input type="text" name="initials" id="initials">
+                <button id="submit">submit</button>
+            </div>
+            <div id="scores">
+                <div id="scoreboard">
+                </div>
+                <button id="startOver">Start Over</button>
             </div>
         </div>
     </main>

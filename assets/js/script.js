@@ -73,7 +73,6 @@ var quizObj = {
         
         // new array of answer strings
         var possibleAnswers = quizQuestions[currentQuestion]["answers"];
-        console.log(possibleAnswers);
         // loop through the new array
         for (var i = 0; i < possibleAnswers.length; i++) {
             // assign each answer string to a new <button> element...
@@ -104,8 +103,31 @@ var quizObj = {
     // show the final score
     // submit high score
     document.getElementById('quizArea').style.display = 'none';
-    document.getElementById('finalScore').style.display = 'block';
+    document.getElementById('endQuiz').style.display = 'block';
     document.getElementById('finalScore').innerHTML = '<p>Final Score: ' + currentScore + '/' + quizObj.questionData.length + '</p>';
+
+    defaulTimeLeft = 60;
+    document.querySelector("#timer").textContent = `Time Remaining: ${defaulTimeLeft} seconds`;
+    },
+    showScoreboard: () => {
+        var myInitials = document.getElementById('initials').value;
+        var records = localStorage.getItem('scoreboard');
+        if (records == null) {
+            records = '<br>' + myInitials + ' ' + currentScore;
+        } else {
+            records += '<br>' + myInitials + ' ' + currentScore;
+        }
+        localStorage.setItem('scoreboard', records);
+
+        document.getElementById('endQuiz').style.display = 'none';
+        document.getElementById('scores').style.display = 'block';
+        document.getElementById('scoreboard').innerHTML = records;
+    },
+    startOver: () => {
+        document.getElementById('scores').style.display = 'none';
+
+        document.getElementById('introArea').classList.remove('d-none');
+        document.getElementById('introArea').classList.add('d-flex');
     }
 }
 
@@ -113,6 +135,8 @@ var quizObj = {
 
 // Execute application function
 var startQuiz = function () {
+    currentScore = 0;
+    currentQuestion = 0;
     // hide intro section
     quizObj.hideQuizIntro();
     // begin the timer
@@ -128,3 +152,6 @@ document.querySelector("#choice_1").addEventListener("click", quizObj.checkAnswe
 document.querySelector("#choice_2").addEventListener("click", quizObj.checkAnswer);
 document.querySelector("#choice_3").addEventListener("click", quizObj.checkAnswer);
 document.querySelector("#choice_4").addEventListener("click", quizObj.checkAnswer);
+
+document.querySelector('#submit').addEventListener('click', quizObj.showScoreboard);
+document.querySelector('#startOver').addEventListener('click', quizObj.startOver);

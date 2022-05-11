@@ -2,6 +2,10 @@
     display: none;
 }
 
-#finalScore {
+#endQuiz {
+    display: none;
+}
+
+#scores {
     display: none;
 }
