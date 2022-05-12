@@ -39,7 +39,6 @@ var quizObj = {
             correctAnswer: 3
         },
     ],
-    ////////////////////////////////////////////////
     hideQuizIntro: () => {
         document.getElementById('introArea').classList.remove('d-flex');
         document.getElementById('introArea').classList.add('d-none');
@@ -80,7 +79,7 @@ var quizObj = {
         }
     },
     checkAnswer: () => {
-        var answer = event.target.textContent;
+        var answer = Event.target.textContent;
         if (answer === quizObj.questionData[currentQuestion].answers[quizObj.questionData[currentQuestion].correctAnswer]) {
             currentScore++;
             document.querySelector('#result').innerHTML = 'correct!';
@@ -100,9 +99,10 @@ var quizObj = {
     },
     endQuiz: () => {
     // hide quiz area
-    // show the final score
     // submit high score
     document.getElementById('quizArea').style.display = 'none';
+        // show the final score
+
     document.getElementById('endQuiz').style.display = 'block';
     document.getElementById('finalScore').innerHTML = '<p>Final Score: ' + currentScore + '/' + quizObj.questionData.length + '</p>';
 
@@ -132,7 +132,6 @@ var quizObj = {
 }
 
 ////////////////////////////////////////////////
-
 // Execute application function
 var startQuiz = function () {
     currentScore = 0;
@@ -148,6 +147,7 @@ var startQuiz = function () {
 // Start quiz when click event triggered
 document.querySelector("#startBtn").addEventListener("click", startQuiz);
 
+// event listeners
 document.querySelector("#choice_1").addEventListener("click", quizObj.checkAnswer);
 document.querySelector("#choice_2").addEventListener("click", quizObj.checkAnswer);
 document.querySelector("#choice_3").addEventListener("click", quizObj.checkAnswer);
