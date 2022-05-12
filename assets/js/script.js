@@ -136,6 +136,7 @@ var quizObj = {
 var startQuiz = function () {
     currentScore = 0;
     currentQuestion = 0;
+
     // hide intro section
     quizObj.hideQuizIntro();
     // begin the timer
@@ -144,7 +145,7 @@ var startQuiz = function () {
     quizObj.nextQuestion();
 }
 
-// Start quiz when click event triggered
+// start quiz
 document.querySelector("#startBtn").addEventListener("click", startQuiz);
 
 // event listeners
@@ -153,5 +154,6 @@ document.querySelector("#choice_2").addEventListener("click", quizObj.checkAnswe
 document.querySelector("#choice_3").addEventListener("click", quizObj.checkAnswer);
 document.querySelector("#choice_4").addEventListener("click", quizObj.checkAnswer);
 
+// end quiz
 document.querySelector('#submit').addEventListener('click', quizObj.showScoreboard);
 document.querySelector('#startOver').addEventListener('click', quizObj.startOver);
