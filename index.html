@@ -22,6 +22,7 @@
                 <button id="startBtn" class="w-75 px-5 py-1 rounded-pill font-weight-bold">Start</button>
             </div>
             <div id="quizArea" class="bg-light m-5">
+                <h1 id="result" class="p-3 text-center"></h1>
                 <h3 id="questionNumberPlaceholder"></h3>
                 <h1 id="questionPlaceholder"></h1>
                 <ol id="answersListPlaceholder">
@@ -30,11 +31,11 @@
                     <li><button id="choice_3" class="answerOption m-1 p-3 w-75 rounded text-left"></button></li>
                     <li><button id="choice_4" class="answerOption m-1 p-3 w-75 rounded text-left"></button></li>
                 </ol>
-                <p id="result"></p>
+                
             </div>
             <div id="endQuiz">
-                <p id="finalScore"></p>
-                <label for="initials">Enter your initials</label>
+                <h3 id="finalScore" class="text-light text-center"></h3>
+                <label for="initials" class="text-light">Enter your initials</label>
                 <input type="text" name="initials" id="initials">
                 <button id="submit">submit</button>
             </div>

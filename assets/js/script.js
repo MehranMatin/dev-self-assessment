@@ -38,6 +38,26 @@ var quizObj = {
             ],
             correctAnswer: 3
         },
+        {
+            question: "Which below is an HTML element?",
+            answers: [
+                "<reserve>",
+                "<li>",
+                "<console>",
+                "<sources>"
+            ],
+            correctAnswer: 1
+        },
+        {
+            question: "Which below is a javascript function?",
+            answers: [
+                "function begin() {console.log('hello')};",
+                "<span>FUNCTION: begin;</span>",
+                "#function.begin {display: block}",
+                "git commit -m 'function begin'"
+            ],
+            correctAnswer: 0
+        }
     ],
     hideQuizIntro: () => {
         document.getElementById('introArea').classList.remove('d-flex');
@@ -79,13 +99,15 @@ var quizObj = {
         }
     },
     checkAnswer: () => {
-        var answer = Event.target.textContent;
+        var answer = event.target.textContent;
         if (answer === quizObj.questionData[currentQuestion].answers[quizObj.questionData[currentQuestion].correctAnswer]) {
             currentScore++;
-            document.querySelector('#result').innerHTML = 'correct!';
+            document.querySelector('#result').innerHTML = 'Correct!';
+            document.querySelector('#result').style.color = 'green';
         } else {
             defaulTimeLeft -= 5;
-            document.querySelector('#result').innerHTML = 'incorrect!';
+            document.querySelector('#result').innerHTML = 'Wrong!';
+            document.querySelector('#result').style.color = 'red';
         }
 
         currentQuestion++;
